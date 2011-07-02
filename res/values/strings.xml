@@ -2,4 +2,9 @@
 <resources>
     <string name="hello">Hello World, AunctionDroidActivity!</string>
     <string name="app_name">AunctionDroid</string>
+    <string name="login_button_text">Login</string>
+    <string name="search_button_text">Search</string>
+    <string name="add_item_button_text">Register new</string>
+    <string name="bid_item_screen_button">Buy item</string>
+    <string name="pick_button_date_text">Pick</string>
 </resources>
