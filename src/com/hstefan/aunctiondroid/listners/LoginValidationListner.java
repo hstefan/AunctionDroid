@@ -9,7 +9,6 @@ import com.hstefan.aunctiondroid.db.PassDigester;
 import com.hstefan.aunctiondroid.db.entities.User;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
