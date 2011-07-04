@@ -29,7 +29,7 @@ public class DbHelper extends SQLiteOpenHelper {
 					USER_TABLE,
 					"id INTEGER PRIMARY KEY AUTOINCREMENT,",
 					"email TEXT NOT NULL", 
-					"password TEXT NOT NULL"});
+					"password BLOB NOT NULL"});
 		}
 		insertExampleData(db);
 	}
@@ -46,17 +46,14 @@ public class DbHelper extends SQLiteOpenHelper {
 			try {
 				db.execSQL(users_sql, new String[] {USER_TABLE, 
 						"hugopuhlmann@gmail.com", 
-						LoginValidationListner.digestPass("123")});
+						new String(PassDigester.digest("123"))});
 				db.execSQL(users_sql, new String[] {USER_TABLE, 
 						"puhlmann@inf.ufsm.br", 
-						LoginValidationListner.digestPass("123")});
+						new String(PassDigester.digest("123"))});
 				db.execSQL(users_sql, new String[] {USER_TABLE, 
 						"fiabane@inf.ufsm.br", 
-						LoginValidationListner.digestPass("123")});
+						new String(PassDigester.digest("123"))});
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NoSuchAlgorithmException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
