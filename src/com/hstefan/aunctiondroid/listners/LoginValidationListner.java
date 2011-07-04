@@ -5,10 +5,14 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import com.hstefan.aunctiondroid.R;
+import com.hstefan.aunctiondroid.db.DbHelper;
 import com.hstefan.aunctiondroid.db.PassDigester;
 import com.hstefan.aunctiondroid.db.entities.User;
 
 import android.app.Activity;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -16,10 +20,12 @@ import android.widget.EditText;
 public class LoginValidationListner implements OnClickListener {
 	
 	private Activity parent;
+	private SQLiteDatabase database;
 	
-	public LoginValidationListner(Activity parent) {
+	public LoginValidationListner(Activity parent, SQLiteDatabase database) {
 		super();
 		this.parent = parent;
+		this.database = database;
 	}
 
 	public void onClick(View v) {
@@ -40,6 +46,13 @@ public class LoginValidationListner implements OnClickListener {
 	
 	private User validateUser(String email, String pass) {
 		byte[] digest = PassDigester.digest(pass);
+		Cursor res = database.query(DbHelper.USER_TABLE, null, 
+				"email = ? AND password = ?",
+				new String[]{email, new String(digest)}, 
+				null, null, null);
+		if(res.getColumnCount() == 1) {
+			return new User();
+		}
 		return null;
 	}
 
