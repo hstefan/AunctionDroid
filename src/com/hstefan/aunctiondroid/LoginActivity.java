@@ -23,6 +23,6 @@ public class LoginActivity extends Activity {
 
 	private void setListners() {
 		Button b = (Button)findViewById(R.id.login_button);
-        b.setOnClickListener(new LoginValidationListner());
+        b.setOnClickListener(new LoginValidationListner(this));
 	}
 }
