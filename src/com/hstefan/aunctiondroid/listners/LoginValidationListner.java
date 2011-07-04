@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import com.hstefan.aunctiondroid.R;
+import com.hstefan.aunctiondroid.db.PassDigester;
 import com.hstefan.aunctiondroid.db.entities.User;
 
 import android.app.Activity;
@@ -16,8 +17,6 @@ import android.widget.EditText;
 public class LoginValidationListner implements OnClickListener {
 	
 	private Activity parent;
-	
-	static final int NUM_ROUNDS = 30;
 	
 	public LoginValidationListner(Activity parent) {
 		super();
@@ -41,24 +40,9 @@ public class LoginValidationListner implements OnClickListener {
 	}
 	
 	private User validateUser(String email, String pass) {
-		try {
-			String out = digestPass(pass);
-			System.out.println(out);
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Log.i("security", "Unable to get proper MessageDigest.");
-		}
+		byte[] digest = PassDigester.digest(pass);
 		return null;
 	}
 
-	public static String digestPass(String pass) throws NoSuchAlgorithmException {
-		MessageDigest digester = MessageDigest.getInstance("SHA-512");
-		digester.update(pass.getBytes());
-		for(int rounds = 0; rounds < NUM_ROUNDS; rounds++) {
-			digester.update(digester.digest());
-		}
-		return new String(digester.digest());
-	}
 
 }
