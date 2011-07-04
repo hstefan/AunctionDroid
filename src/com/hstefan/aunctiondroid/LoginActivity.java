@@ -1,5 +1,7 @@
 package com.hstefan.aunctiondroid;
 
+import com.hstefan.aunctiondroid.listners.LoginValidationListner;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -16,21 +18,11 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 		
-		Button b = (Button)findViewById(R.id.login_button);
-        b.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				validateLogin(v);
-			}
-		});
+		setListners();
 	}
-	
-	private void validateLogin(View v) {
-		EditText login = (EditText)findViewById(R.id.email_text);
-		EditText pass = (EditText)findViewById(R.id.pass_text);
-		
-		if(login.getText().equals("hstefan") && pass.getText().equals("123")) {
-			Intent next = new Intent(this, AunctionDroidActivity.class);
-			startActivity(next);
-		}
+
+	private void setListners() {
+		Button b = (Button)findViewById(R.id.login_button);
+        b.setOnClickListener(new LoginValidationListner());
 	}
 }
