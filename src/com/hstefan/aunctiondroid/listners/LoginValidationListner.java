@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import com.hstefan.aunctiondroid.LoginActivity;
 import com.hstefan.aunctiondroid.R;
 import com.hstefan.aunctiondroid.db.DbHelper;
 import com.hstefan.aunctiondroid.db.PassDigester;
@@ -39,6 +40,9 @@ public class LoginValidationListner implements OnClickListener {
 		User u = validateUser(email, pass);
 		if(u != null) {
 			Log.i("Login attempt", "Sucessful");
+			((LoginActivity)parent).onAuthentication(u);
+			log_etext.setText(null);
+			pass_etext.setText(null);
 		} else {
 			Log.i("Login attempt", "unsucessful");
 		}

@@ -1,6 +1,7 @@
 package com.hstefan.aunctiondroid;
 
 import com.hstefan.aunctiondroid.db.DbHelper;
+import com.hstefan.aunctiondroid.db.entities.User;
 import com.hstefan.aunctiondroid.listners.LoginValidationListner;
 
 import android.app.Activity;
@@ -29,5 +30,10 @@ public class LoginActivity extends Activity {
 	private void setListners() {
 		Button b = (Button)findViewById(R.id.login_button);
         b.setOnClickListener(new LoginValidationListner(this, helper.getWritableDatabase()));
+	}
+	
+	public void onAuthentication(User user) {
+		Intent intent = new Intent(this, ProfileActivity.class);
+		startActivity(intent);
 	}
 }
