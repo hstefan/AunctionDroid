@@ -3,6 +3,7 @@ package com.hstefan.aunctiondroid;
 import com.hstefan.aunctiondroid.db.entities.User;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,8 +31,8 @@ public class ProfileActivity extends Activity {
 		reg_button.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				setContentView(R.layout.register_item);
-				
+				Intent intent = new Intent(ProfileActivity.this, RegisterItemActivity.class);
+				startActivity(intent);
 			}
 		});
 	}
