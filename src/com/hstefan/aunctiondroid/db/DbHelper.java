@@ -21,7 +21,8 @@ public class DbHelper extends SQLiteOpenHelper {
 	
 	public DbHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
-		context.deleteDatabase(DATABASE_NAME);
+		getWritableDatabase().delete(USER_TABLE, null, null);
+		insertExampleData(getWritableDatabase());
 	}
 
 	@Override
@@ -33,7 +34,6 @@ public class DbHelper extends SQLiteOpenHelper {
 					"password TEXT NOT NULL)";
 			db.execSQL(create_sql);
 		}
-		insertExampleData(db);
 	}
 
 	@Override
@@ -45,12 +45,12 @@ public class DbHelper extends SQLiteOpenHelper {
 	
 	private void insertExampleData(SQLiteDatabase db) {
 		if(DATABASE_VERSION >= 1) {
-			String users_sql = "INSERT INTO ? VALUES (?, ?)";
 			try {
 				ContentValues cv = new ContentValues();
 				cv.put("email", "hugopuhlmann@gmail.com");
 				cv.put("password", new String(PassDigester.digest("123")));
 				db.insert(USER_TABLE, null, cv);
+				Log.i("Example data", "inserted");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

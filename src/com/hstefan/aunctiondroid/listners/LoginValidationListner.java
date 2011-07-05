@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -37,21 +38,21 @@ public class LoginValidationListner implements OnClickListener {
 		
 		User u = validateUser(email, pass);
 		if(u != null) {
-			//means credentials are OK
-			//TODO
+			Log.i("Login attempt", "Sucessful");
 		} else {
-			//do something
+			Log.i("Login attempt", "unsucessful");
 		}
 	}
 	
 	private User validateUser(String email, String pass) {
 		byte[] digest = PassDigester.digest(pass);
 		Cursor res = database.query(DbHelper.USER_TABLE, null, 
-				"email = ? AND password = ?",
-				new String[]{email, new String(digest)}, 
+				"email=? AND password=?",
+				new String[]{email, new String(digest)},
 				null, null, null);
-		if(res.getColumnCount() == 1) {
-			return new User();
+		if(res.getColumnCount() >= 1) {
+			res.moveToFirst();
+			return new User(res.getInt(0), res.getString(1), res.getString(2));
 		}
 		return null;
 	}
