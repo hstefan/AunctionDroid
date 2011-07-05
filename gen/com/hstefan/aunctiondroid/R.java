@@ -20,10 +20,11 @@ public final class R {
         public static final int button1=0x7f050008;
         public static final int buy_button_id=0x7f05000f;
         public static final int buyout_price_edittext=0x7f050006;
-        public static final int confirm_register_button=0x7f050010;
-        public static final int discard_register_button=0x7f050011;
+        public static final int confirm_register_button=0x7f050011;
+        public static final int discard_register_button=0x7f050012;
         public static final int editText1=0x7f050001;
         public static final int email_text=0x7f050009;
+        public static final int item_edit_text=0x7f050010;
         public static final int linearLayout1=0x7f050000;
         public static final int linearLayout2=0x7f05000c;
         public static final int linearLayout3=0x7f05000d;
