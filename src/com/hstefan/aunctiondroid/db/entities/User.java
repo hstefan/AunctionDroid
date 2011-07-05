@@ -5,11 +5,14 @@ public class User {
 	private String email;
 	private String pass;
 	
+	static User instance = null;
+	
 	public User(int id, String email, String pass) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.pass = pass;
+		setActive(this);
 	}
 	
 	public int getId() {
@@ -30,5 +33,13 @@ public class User {
 
 	public String getPass() {
 		return pass;
+	}
+	
+	public static User getActive() {
+		return instance;
+	}
+	
+	public static void setActive(User u) {
+		instance = u;
 	}
 }
