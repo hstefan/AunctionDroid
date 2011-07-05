@@ -7,4 +7,6 @@
     <string name="add_item_button_text">Register new</string>
     <string name="bid_item_screen_button">Buy item</string>
     <string name="pick_button_date_text">Pick</string>
+    <string name="register_text">Register</string>
+    <string name="discard_text">Nevermind</string>
 </resources>

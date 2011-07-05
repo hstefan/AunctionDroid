@@ -6,6 +6,9 @@ import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class ProfileActivity extends Activity {
 	SQLiteDatabase helper;
@@ -17,7 +20,20 @@ public class ProfileActivity extends Activity {
 		setContentView(R.layout.profile);
 		
 		Log.i("Session started:", User.getActive().getEmail() + ":" + User.getActive().getPass());
-		helper = AunctionDroidActivity.getHelper().getWritableDatabase();	
+		helper = AunctionDroidActivity.getHelper().getWritableDatabase();
+		
+		setListners();
+	}
+
+	private void setListners() {
+		Button reg_button = (Button)findViewById(R.id.register_button_id);
+		reg_button.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) {
+				setContentView(R.layout.register_item);
+				
+			}
+		});
 	}
 	
 }
