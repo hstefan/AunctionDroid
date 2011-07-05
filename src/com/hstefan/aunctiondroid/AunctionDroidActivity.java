@@ -1,8 +1,6 @@
 package com.hstefan.aunctiondroid;
 
 import com.hstefan.aunctiondroid.db.DbHelper;
-import com.hstefan.aunctiondroid.db.entities.User;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

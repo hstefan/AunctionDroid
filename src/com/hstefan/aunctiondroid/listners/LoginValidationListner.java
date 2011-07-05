@@ -1,9 +1,5 @@
 package com.hstefan.aunctiondroid.listners;
 
-import java.io.InputStream;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import com.hstefan.aunctiondroid.LoginActivity;
 import com.hstefan.aunctiondroid.R;
 import com.hstefan.aunctiondroid.db.DbHelper;
