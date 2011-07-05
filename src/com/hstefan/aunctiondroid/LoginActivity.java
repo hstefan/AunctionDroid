@@ -23,7 +23,7 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
-		helper = new DbHelper(this);
+		helper = AunctionDroidActivity.getHelper();
 		setListners();
 	}
 

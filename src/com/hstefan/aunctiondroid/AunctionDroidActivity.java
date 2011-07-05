@@ -10,7 +10,7 @@ import android.os.Bundle;
 public class AunctionDroidActivity extends Activity {
     /** Called when the activity is first created. */
 	private boolean is_logged_in;
-	private DbHelper dbhelper;
+	private static DbHelper dbhelper = null;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,5 +24,9 @@ public class AunctionDroidActivity extends Activity {
         } else {
         	setContentView(R.layout.profile);
         }
+    }
+    
+    static DbHelper getHelper() {
+    	return dbhelper;
     }
 }
