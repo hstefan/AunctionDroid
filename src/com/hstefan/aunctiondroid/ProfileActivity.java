@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class ProfileActivity extends Activity {
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
