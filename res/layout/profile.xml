@@ -4,7 +4,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent" android:orientation="vertical">
     <LinearLayout android:id="@+id/linearLayout2" android:layout_width="match_parent" android:orientation="vertical" android:layout_height="match_parent" android:layout_weight="1">
-        <ListView android:id="@+id/listView1" android:layout_width="match_parent" android:layout_height="match_parent"></ListView>
+        <ListView android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/profile_items_list_id"></ListView>
     </LinearLayout>
     <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_width="match_parent">
         <LinearLayout android:layout_height="match_parent" android:id="@+id/linearLayout3" android:layout_width="match_parent">

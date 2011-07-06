@@ -50,7 +50,7 @@ public class LoginValidationListner implements OnClickListener {
 				"email=? AND password=?",
 				new String[]{email, new String(digest)},
 				null, null, null);
-		if(res.getColumnCount() >= 1) {
+		if(res.getCount() >= 1) {
 			res.moveToFirst();
 			return new User(res.getInt(0), res.getString(1), res.getString(2));
 		}

@@ -27,7 +27,7 @@ public class RegisterItemActivity extends Activity{
 	}
 
 	private void setListners() {
-		Button reg = (Button)findViewById(R.id.register_button_id);
+		Button reg = (Button)findViewById(R.id.confirm_register_button);
 		reg.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
@@ -39,9 +39,10 @@ public class RegisterItemActivity extends Activity{
 				ContentValues user_item_val = new ContentValues();
 				user_item_val.put("id_user", User.getActive().getId());
 				user_item_val.put("id_item", id_item);
-				long id_user = database.insert(DbHelper.USER_ITEM_TABLE, null, user_item_val);
-				Log.i("Created relation", Long.toString(id_item) + "-" );
+				database.insert(DbHelper.USER_ITEM_TABLE, null, user_item_val);
+				//Log.i("Created relation", Long.toString(id_item));
 			}
 		});
+		
 	}
 }

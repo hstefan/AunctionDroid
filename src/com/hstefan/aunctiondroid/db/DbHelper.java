@@ -26,12 +26,12 @@ public class DbHelper extends SQLiteOpenHelper {
 	public DbHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		//eraseTableRows();
+		insertExampleData(getWritableDatabase());
 		try {
 			context.openFileInput(DB_SAMPLE_DATA_FILE);
 		} catch (FileNotFoundException e) {
 			try {
 				context.openFileOutput(DB_SAMPLE_DATA_FILE, 0);
-				insertExampleData(getWritableDatabase());
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
