@@ -16,6 +16,7 @@
         <activity android:name="LoginActivity"></activity>
         <activity android:name="ProfileActivity"></activity>
         <activity android:name="RegisterItemActivity"></activity>
+        <activity android:name="ViewAunctionsActivity"></activity>
 
     </application>
 </manifest>
