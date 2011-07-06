@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -33,11 +34,13 @@ public class RegisterItemActivity extends Activity{
 				ContentValues item_val = new ContentValues();
 				item_val.put("name", ((EditText)findViewById(R.id.item_edit_text)).getText().toString());
 				long id_item = database.insert(DbHelper.ITEM_TABLE, null, item_val);
+				Log.i("Created item", (((EditText)findViewById(R.id.item_edit_text)).getText().toString()));
 				
 				ContentValues user_item_val = new ContentValues();
 				user_item_val.put("id_user", User.getActive().getId());
 				user_item_val.put("id_item", id_item);
-				database.insert(DbHelper.USER_ITEM_TABLE, null, user_item_val);
+				long id_user = database.insert(DbHelper.USER_ITEM_TABLE, null, user_item_val);
+				Log.i("Created relation", Long.toString(id_item) + "-" );
 			}
 		});
 	}
