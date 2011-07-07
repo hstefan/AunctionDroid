@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:titleCondensed="Remove" android:visible="true" android:title="Remove" android:id="@+id/remove_item_menu" android:checked="false" android:enabled="true" android:checkable="false"></item>
+    <item android:titleCondensed="Sell" android:title="Sell" android:id="@+id/create_aunction_item_menu" android:visible="true" android:checked="false" android:enabled="true" android:checkable="false"></item>
+</menu>

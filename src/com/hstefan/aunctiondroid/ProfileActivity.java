@@ -1,20 +1,27 @@
 package com.hstefan.aunctiondroid;
 
-import com.hstefan.aunctiondroid.db.DbHelper;
-import com.hstefan.aunctiondroid.db.entities.User;
-
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.hstefan.aunctiondroid.db.DbHelper;
+import com.hstefan.aunctiondroid.db.entities.User;
 
 public class ProfileActivity extends Activity {
 	SQLiteDatabase myDb;
@@ -31,9 +38,20 @@ public class ProfileActivity extends Activity {
 	}
 	
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.menu_item_row, menu);
+	    return true;
+	}
+	
+	@Override
 	protected void onResume() {
 		super.onResume();
 		Log.i("Profile", "Resumed");
+		setListAdapter();
+	}
+
+	private void setListAdapter() {
 		StringBuilder str_builder = new StringBuilder("SELECT ");
 		
 		str_builder.append(DbHelper.ITEM_TABLE);
@@ -74,6 +92,51 @@ public class ProfileActivity extends Activity {
 				startActivity(intent);
 			}
 		});
+		
+		Button buy_button = (Button)findViewById(R.id.buy_button_id);
+		
+		buy_button.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) {
+				Intent intent = new Intent(ProfileActivity.this, ViewAunctionsActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		ListView list_view = (ListView)findViewById(R.id.profile_items_list_id);
+		list_view.setOnItemClickListener(new OnItemClickListener() {
+
+			public void onItemClick(final AdapterView<?> adapter, View v, final int pos,
+					long id) {
+				final CharSequence[] items = {"Delete", "Sell"};
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+				builder.setTitle("Pick a color");
+				builder.setItems(items, new DialogInterface.OnClickListener() {
+				    public void onClick(DialogInterface dialog, int item) {
+				        if(item == 0) {
+				        	onItemDeletion(adapter, pos);
+				        } else if(item == 1) {
+				        	onItemSell(adapter, pos);
+				        }
+				    }
+				});
+				AlertDialog alert = builder.create();
+				alert.show();
+			}
+		});
+	}
+	
+	private void onItemDeletion(AdapterView<?> adapter, int pos) {
+		long id = adapter.getItemIdAtPosition(pos);
+		System.out.println("IDDDDDDDDDDDDD " + Long.toString(id));
+		myDb.delete(DbHelper.ITEM_TABLE, "id=?", new String[]{Long.toString(id)});
+		myDb.delete(DbHelper.USER_ITEM_TABLE, "id_item=?", new String[]{Long.toString(id)});
+		setListAdapter();
+	}
+	
+	private void onItemSell(AdapterView<?> adapter, int pos) {
+		
 	}
 	
 }

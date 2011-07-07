@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 public class LoginActivity extends Activity {
@@ -23,6 +24,8 @@ public class LoginActivity extends Activity {
 
 	private void setListners() {
 		Button b = (Button)findViewById(R.id.login_button);
+		if(b == null)
+			Log.d("Null", "null");
         b.setOnClickListener(new LoginValidationListner(this, helper.getWritableDatabase()));
 	}
 	
