@@ -7,6 +7,6 @@
     <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_width="match_parent">
         <EditText android:layout_weight="1" android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/editText1" android:hint="Item"></EditText>
     </LinearLayout>
-    <ListView android:id="@+id/listView1" android:layout_width="match_parent" android:layout_height="match_parent"></ListView>
+    <ListView android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/bid_list_view"></ListView>
     
 </LinearLayout>

@@ -3,7 +3,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent" android:id="@+id/bid_row_item_text" android:orientation="horizontal">
-    <TextView android:text="TextView" android:gravity="left" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/bid_item_text_id" android:layout_weight="1"></TextView>
-    <TextView android:text="TextView" android:layout_width="wrap_content" android:gravity="right" android:layout_height="wrap_content" android:id="@+id/bid_item_bid_text" android:layout_weight="1"></TextView>
+    <TextView android:text="TextView" android:gravity="left" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1" android:id="@+id/bid_item_name_id"></TextView>
+    <TextView android:text="TextView" android:layout_width="wrap_content" android:gravity="right" android:layout_height="wrap_content" android:layout_weight="1" android:id="@+id/bid_item_price_text_id"></TextView>
      
 </LinearLayout>
