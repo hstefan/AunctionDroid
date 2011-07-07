@@ -3,7 +3,7 @@ package com.hstefan.aunctiondroid;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,20 +17,21 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
 
 import com.hstefan.aunctiondroid.db.DbHelper;
 import com.hstefan.aunctiondroid.db.entities.User;
 
 public class ProfileActivity extends Activity {
 	SQLiteDatabase myDb;
+	long id_item;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		id_item = 0;
 		setContentView(R.layout.profile);
 		
 		Log.i("Session started:", User.getActive().getEmail() + ":" + User.getActive().getPass());
@@ -145,14 +146,36 @@ public class ProfileActivity extends Activity {
 			dialog = new Dialog(this);
 			dialog.setContentView(R.layout.create_auction);
 			dialog.setTitle("Create aunction");
+			Button confirm = (Button)findViewById(R.id.create_aunction_confirm_button);
+			confirm.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					createAunction(v);
+				}
+			});
 			
+			Button nevermind = (Button)findViewById(R.id.cancel_aunction);
+			nevermind.setOnClickListener(new OnClickListener() {	
+			public void onClick(View v) {
+					ProfileActivity.this.dismissDialog(0);
+				}
+			});
 			return dialog;
 		}
 		return dialog;
 	}
 
 	
+	protected void createAunction(View v) {
+		ContentValues cv = new ContentValues();
+		cv.put("id_user", User.getActive().getId());
+		cv.put("id_item", id_item);
+		EditText p_text = (EditText)findViewById(R.id.price_edittext);
+		cv.put("price", p_text.getEditableText().toString());
+		myDb.insert(DbHelper.AUNCTIONS_TABLE, null, cv);
+	}
+
 	private void onItemSell(AdapterView<?> adapter, int pos) {
+		id_item = adapter.getItemIdAtPosition(pos);
 		showDialog(0);
 	}
 	

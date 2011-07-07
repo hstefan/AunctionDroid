@@ -1,9 +1,6 @@
 package com.hstefan.aunctiondroid.db;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -40,6 +37,7 @@ public class DbHelper extends SQLiteOpenHelper {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void eraseTableRows() {
 		SQLiteDatabase db = getWritableDatabase();
 		db.delete(USER_ITEM_TABLE, null, null);
