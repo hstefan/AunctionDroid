@@ -52,7 +52,7 @@ public class LoginValidationListner implements OnClickListener {
 				null, null, null);
 		if(res.getCount() >= 1) {
 			res.moveToFirst();
-			return new User(res.getInt(0), res.getString(1), res.getString(2));
+			return new User(res.getInt(0), res.getString(1), res.getString(2), res.getInt(3));
 		}
 		return null;
 	}

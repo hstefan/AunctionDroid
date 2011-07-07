@@ -24,7 +24,7 @@ public class DbHelper extends SQLiteOpenHelper {
 	public DbHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		//eraseTableRows();
-		insertExampleData(getWritableDatabase());
+		//insertExampleData(getWritableDatabase());
 		try {
 			context.openFileInput(DB_SAMPLE_DATA_FILE);
 		} catch (FileNotFoundException e) {
@@ -46,6 +46,8 @@ public class DbHelper extends SQLiteOpenHelper {
 		Log.i("Dropping table", ITEM_TABLE);
 		db.delete(USER_TABLE, null, null);
 		Log.i("Dropping table", USER_TABLE);
+		db.delete(AUNCTIONS_TABLE, null, null);
+		Log.i("Dropping table", AUNCTIONS_TABLE);
 	}
 
 	@Override
@@ -130,7 +132,7 @@ public class DbHelper extends SQLiteOpenHelper {
 			"FOREIGN KEY(id_item) REFERENCES " + ITEM_TABLE + ")";
 			db.execSQL(create_sql);
 			Log.i("Creating SQLite table(upgrade)", USER_ITEM_TABLE);
-		} if(DATABASE_VERSION >= 3) {
+		} if(DATABASE_VERSION >= 3 && newVersion != 4) {
 			StringBuilder builder = new StringBuilder();
 			builder.append("ALTER TABLE ");
 			builder.append(USER_TABLE);
@@ -160,6 +162,7 @@ public class DbHelper extends SQLiteOpenHelper {
 				ContentValues cv = new ContentValues();
 				cv.put("email", "hugopuhlmann@gmail.com");
 				cv.put("password", new String(PassDigester.digest("123")));
+				cv.put("money" , 1000);
 				db.insert(USER_TABLE, null, cv);
 				Log.i("Example data", "inserted");
 			} catch (SQLException e) {

@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import com.hstefan.aunctiondroid.db.DbHelper;
 import com.hstefan.aunctiondroid.db.entities.User;
@@ -51,6 +52,8 @@ public class ProfileActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		Log.i("Profile", "Resumed");
+		TextView tv = (TextView)findViewById(R.id.funds_label_id);
+		tv.setText("Balance: " + Integer.toString(User.getActive().getMoney()));
 		setListAdapter();
 	}
 
@@ -140,20 +143,20 @@ public class ProfileActivity extends Activity {
 	
 	@Override
 	protected Dialog onCreateDialog(int id) {
-		Dialog dialog = null;
+		final Dialog dialog = new Dialog(this);
 		switch(id) {
 		case 0:
-			dialog = new Dialog(this);
 			dialog.setContentView(R.layout.create_auction);
 			dialog.setTitle("Create aunction");
-			Button confirm = (Button)findViewById(R.id.create_aunction_confirm_button);
+			Button confirm = (Button)dialog.findViewById(R.id.create_aunction_confirm_button);
 			confirm.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
-					createAunction(v);
+					createAunction(v, dialog.findViewById(R.id.price_edittext));
+					dismissDialog(0);
 				}
 			});
 			
-			Button nevermind = (Button)findViewById(R.id.cancel_aunction);
+			Button nevermind = (Button)dialog.findViewById(R.id.cancel_aunction);
 			nevermind.setOnClickListener(new OnClickListener() {	
 			public void onClick(View v) {
 					ProfileActivity.this.dismissDialog(0);
@@ -161,15 +164,15 @@ public class ProfileActivity extends Activity {
 			});
 			return dialog;
 		}
-		return dialog;
+		return null;
 	}
 
 	
-	protected void createAunction(View v) {
+	protected void createAunction(View v, View view) {
 		ContentValues cv = new ContentValues();
 		cv.put("id_user", User.getActive().getId());
 		cv.put("id_item", id_item);
-		EditText p_text = (EditText)findViewById(R.id.price_edittext);
+		EditText p_text = (EditText)view.findViewById(R.id.price_edittext);
 		cv.put("price", p_text.getEditableText().toString());
 		myDb.insert(DbHelper.AUNCTIONS_TABLE, null, cv);
 	}

@@ -40,7 +40,6 @@ public class RegisterItemActivity extends Activity{
 				user_item_val.put("id_user", User.getActive().getId());
 				user_item_val.put("id_item", id_item);
 				database.insert(DbHelper.USER_ITEM_TABLE, null, user_item_val);
-				//Log.i("Created relation", Long.toString(id_item));
 			}
 		});
 		

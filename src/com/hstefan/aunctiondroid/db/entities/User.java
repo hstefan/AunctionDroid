@@ -4,14 +4,16 @@ public class User {
 	private int id;
 	private String email;
 	private String pass;
+	private int money;
 	
 	static User instance = null;
 	
-	public User(int id, String email, String pass) {
+	public User(int id, String email, String pass, int money) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.pass = pass;
+		this.setMoney(money);
 		setActive(this);
 	}
 	
@@ -41,5 +43,13 @@ public class User {
 	
 	public static void setActive(User u) {
 		instance = u;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
+	public int getMoney() {
+		return money;
 	}
 }
