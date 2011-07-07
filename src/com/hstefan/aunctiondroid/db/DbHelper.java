@@ -15,11 +15,12 @@ import android.util.Log;
 public class DbHelper extends SQLiteOpenHelper {
 	
 	public static final String DATABASE_NAME= "aunctiondroid.db";
-	public static final int DATABASE_VERSION = 2;
+	public static final int DATABASE_VERSION = 4;
 	
 	public static final String USER_TABLE = "user";
 	public static final String ITEM_TABLE = "item";
 	public static final String USER_ITEM_TABLE = "user_item";
+	public static final String AUNCTIONS_TABLE = "aunctions";
 	
 	public static final String DB_SAMPLE_DATA_FILE = ".auctiondroid_sample";
 	
@@ -72,6 +73,47 @@ public class DbHelper extends SQLiteOpenHelper {
 			"FOREIGN KEY(id_item) REFERENCES " + ITEM_TABLE + ")";
 			db.execSQL(create_sql);
 			Log.i("Creating SQLite table", USER_ITEM_TABLE);
+		} if(DATABASE_VERSION >= 3) {
+			StringBuilder builder = new StringBuilder();
+			builder.append("ALTER TABLE ");
+			builder.append(USER_TABLE);
+			builder.append(" ADD money INTEGER");
+			db.execSQL(builder.toString());
+			Log.i("Upgrading SQLite table", USER_TABLE);
+			
+			builder.setLength(0);
+			builder.append("CREATE TABLE ");
+			builder.append(AUNCTIONS_TABLE);
+			builder.append("(id INTEGER PRIMARY KEY, id_item INTEGER, id_user INTEGER,");
+			builder.append("price INTEGER NOT NULL, ");
+			builder.append("FOREIGN KEY (id_item) REFERENCES ");
+			builder.append(ITEM_TABLE);
+			builder.append(",");
+			builder.append("FOREIGN KEY (id_user) REFERENCES ");
+			builder.append(USER_TABLE);
+			builder.append(")");
+			db.execSQL(builder.toString());
+			Log.i("Creating SQLite table", AUNCTIONS_TABLE);
+			
+			//Now Playing: Metallica - St. Anger - St. Anger - 2003 - Rock - MP3 - 320 kbps - 7:21 min
+		} if(DATABASE_VERSION >= 4) {
+			db.execSQL("DROP TABLE " + AUNCTIONS_TABLE);
+			Log.i("Dropping table", AUNCTIONS_TABLE);
+			
+			StringBuilder builder = new StringBuilder();
+			builder.setLength(0);
+			builder.append("CREATE TABLE ");
+			builder.append(AUNCTIONS_TABLE);
+			builder.append("(id INTEGER PRIMARY KEY AUTOINCREMENT, id_item INTEGER, id_user INTEGER,");
+			builder.append("price INTEGER NOT NULL, ");
+			builder.append("FOREIGN KEY (id_item) REFERENCES ");
+			builder.append(ITEM_TABLE);
+			builder.append(",");
+			builder.append("FOREIGN KEY (id_user) REFERENCES ");
+			builder.append(USER_TABLE);
+			builder.append(")");
+			db.execSQL(builder.toString());
+			Log.i("Creating SQLite table", AUNCTIONS_TABLE);
 		}
 	}
 
@@ -90,6 +132,27 @@ public class DbHelper extends SQLiteOpenHelper {
 			"FOREIGN KEY(id_item) REFERENCES " + ITEM_TABLE + ")";
 			db.execSQL(create_sql);
 			Log.i("Creating SQLite table(upgrade)", USER_ITEM_TABLE);
+		} if(DATABASE_VERSION >= 3) {
+			StringBuilder builder = new StringBuilder();
+			builder.append("ALTER TABLE ");
+			builder.append(USER_TABLE);
+			builder.append(" ADD money INTEGER");
+			db.execSQL(builder.toString());
+			Log.i("Upgrading SQLite table", USER_TABLE);
+			
+			builder.setLength(0);
+			builder.append("CREATE TABLE ");
+			builder.append(AUNCTIONS_TABLE);
+			builder.append("(id INTEGER PRIMARY KEY AUTOINCREMENT, id_item INTEGER, id_user INTEGER,");
+			builder.append("price INTEGER NOT NULL, ");
+			builder.append("FOREIGN KEY (id_item) REFERENCES ");
+			builder.append(ITEM_TABLE);
+			builder.append(",");
+			builder.append("FOREIGN KEY (id_user) REFERENCES ");
+			builder.append(USER_TABLE);
+			builder.append(")");
+			db.execSQL(builder.toString());
+			Log.i("Upgrading SQLite table", AUNCTIONS_TABLE);
 		}
 	}
 	
