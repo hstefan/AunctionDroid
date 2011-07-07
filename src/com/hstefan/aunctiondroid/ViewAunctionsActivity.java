@@ -26,6 +26,7 @@ public class ViewAunctionsActivity extends Activity {
 		setContentView(R.layout.bidlist);
 		myDb = AunctionDroidActivity.getHelper().getWritableDatabase();
 		setListners();
+		setListAdapter();
 	}
 
 	@Override

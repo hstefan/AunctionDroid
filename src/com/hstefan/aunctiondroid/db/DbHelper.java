@@ -164,7 +164,14 @@ public class DbHelper extends SQLiteOpenHelper {
 				cv.put("password", new String(PassDigester.digest("123")));
 				cv.put("money" , 1000);
 				db.insert(USER_TABLE, null, cv);
-				Log.i("Example data", "inserted");
+				
+				ContentValues cv2 = new ContentValues();
+				cv2.put("email", "lennom@gmail.com");
+				cv2.put("password", new String(PassDigester.digest("abc")));
+				cv2.put("money" , 1000);
+				db.insert(USER_TABLE, null, cv2);
+				
+				Log.i("Example data", "inserted");	
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

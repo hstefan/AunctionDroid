@@ -117,7 +117,7 @@ public class ProfileActivity extends Activity {
 				final CharSequence[] items = {"Delete", "Sell"};
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
-				builder.setTitle("Pick a color");
+				builder.setTitle("Lolwat");
 				builder.setItems(items, new DialogInterface.OnClickListener() {
 				    public void onClick(DialogInterface dialog, int item) {
 				        if(item == 0) {
