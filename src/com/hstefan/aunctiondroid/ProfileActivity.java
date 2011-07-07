@@ -2,6 +2,8 @@ package com.hstefan.aunctiondroid;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,10 +17,10 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hstefan.aunctiondroid.db.DbHelper;
 import com.hstefan.aunctiondroid.db.entities.User;
@@ -135,8 +137,23 @@ public class ProfileActivity extends Activity {
 		setListAdapter();
 	}
 	
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		Dialog dialog = null;
+		switch(id) {
+		case 0:
+			dialog = new Dialog(this);
+			dialog.setContentView(R.layout.create_auction);
+			dialog.setTitle("Create aunction");
+			
+			return dialog;
+		}
+		return dialog;
+	}
+
+	
 	private void onItemSell(AdapterView<?> adapter, int pos) {
-		
+		showDialog(0);
 	}
 	
 }

@@ -3,14 +3,13 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical"
   android:layout_width="match_parent"
-  android:layout_height="match_parent" android:layout_margin="5dp">
-    <EditText android:inputType="number" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Buyout price" android:id="@+id/buyout_price_edittext"></EditText>
-    <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Starting price" android:id="@+id/starting_price_edittext"></EditText>
+  android:layout_height="match_parent"
+  android:minHeight="50sp"
+  android:minWidth="230sp">
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/price_edittext" android:hint="Price" android:layout_margin="4sp"></EditText>
     <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_width="match_parent">
-        <EditText android:inputType="date" android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/editText1" android:layout_weight="0.6" android:hint="End date">
-            <requestFocus></requestFocus>
-        </EditText>
-        <Button android:text="@string/pick_button_date_text" android:id="@+id/button1" android:layout_height="match_parent" android:layout_width="match_parent" android:layout_weight="1"></Button>
+        <Button android:layout_height="match_parent" android:layout_width="match_parent" android:layout_weight="1" android:id="@+id/cancel_aunction" android:text="@string/discard_text"></Button>
+        <Button android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_weight="1" android:id="@+id/create_aunction_confirm_button" android:text="@string/confirm_sell_button"></Button>
     </LinearLayout>
     
 </LinearLayout>

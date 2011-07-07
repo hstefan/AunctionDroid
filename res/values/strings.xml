@@ -6,7 +6,8 @@
     <string name="search_button_text">Search</string>
     <string name="add_item_button_text">Register new</string>
     <string name="bid_item_screen_button">Buy item</string>
-    <string name="pick_button_date_text">Pick</string>
+    <string name="cancel_aunction">Cancel</string>
     <string name="register_text">Register</string>
     <string name="discard_text">Nevermind</string>
+    <string name="confirm_sell_button">Confirm</string>
 </resources>
