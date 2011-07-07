@@ -1,14 +1,20 @@
 package com.hstefan.aunctiondroid;
 
 import com.hstefan.aunctiondroid.db.DbHelper;
+import com.hstefan.aunctiondroid.db.entities.User;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 public class ViewAunctionsActivity extends Activity {
 	
@@ -69,6 +75,45 @@ public class ViewAunctionsActivity extends Activity {
 	}
 	
 	private void setListners() {
-		
+		ListView list = (ListView)findViewById(R.id.bid_list_view);
+		list.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> adapter, View v, int pos,
+					long id) {
+				TextView price_v = (TextView)v.findViewById(R.id.bid_item_price_text_id);
+				int price = Integer.parseInt(price_v.getEditableText().toString());
+				User u = User.getActive();
+				if(u.getMoney() >= price) {
+					u.setMoney(u.getMoney() - price);
+					ContentValues cv  = new ContentValues();
+					cv.put("money", u.getMoney());
+					//atualiza o saldo do comprador
+					myDb.update(DbHelper.AUNCTIONS_TABLE, cv, "id=?", new String[]{ Integer.toString(u.getId())});
+					
+					Cursor c = myDb.query(DbHelper.AUNCTIONS_TABLE, new String[] {"id_user,id_item"},
+							"id_item=?", new String[]{ Long.toString(id) }, null, null, null);
+					c.moveToFirst();
+					int user_id = c.getInt(0); //id do vendedor
+					int item_id = c.getInt(1); //id_item
+					
+					Cursor cs = myDb.query(DbHelper.USER_TABLE, new String[] {"money"},
+							"id=?", new String[]{ Long.toString(user_id)}, null, null, null);
+					cs.moveToFirst();
+					int money = cs.getInt(0); //saldo do vendedor
+					
+					ContentValues seller = new ContentValues();
+					seller.put("money", money + price); //aumenta o saldo do comprador
+					myDb.update(DbHelper.USER_TABLE, seller, "id=?", new String[]{ Long.toString(user_id)});
+					
+					//deleta o item da tabela de vendas
+					myDb.delete(DbHelper.AUNCTIONS_TABLE, "id=?", new String[] { Long.toString(id) });
+					
+					//muda o dono do item
+					ContentValues owner = new ContentValues();
+					owner.put("id_user", u.getId());
+					myDb.update(DbHelper.USER_ITEM_TABLE, owner, "id_item=? AND id_user=?", 
+							new String[] {Integer.toString(item_id), Integer.toString(user_id)});
+				}
+			}
+		});
 	}
 }
